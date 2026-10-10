@@ -176,5 +176,20 @@ async function boot() {
     render();
   } catch (e) { brief = brief || { date: today(), items: [], chart: null }; render(); msg("Error: " + e.message); }
 }
+// ---- Share (brand standard). PRIVACY: only the link + neutral counts, never item titles or details ----
+function shareText() {
+  let taps = []; try { taps = brief ? getTaps() : []; } catch (e) {}
+  const last = {}; taps.forEach((t) => { if (t && t.id != null) last[t.id] = t.action; });
+  const n = (a) => Object.values(last).filter((x) => x === a).length;
+  const parts = [[n("approve"), "approved"], [n("done"), "done"], [n("park"), "parked"], [n("ask"), "asked"]].filter(([c]) => c).map(([c, w]) => `${c} ${w}`);
+  return parts.length ? `Brief update: ${parts.join(", ")}.` : "Brief app link:";
+}
+async function shareApp() {
+  const url = location.origin + location.pathname, text = shareText();
+  if (navigator.share) { try { await navigator.share({ title: "Brief", text, url }); return; } catch (e) { if (e && e.name === "AbortError") return; } }
+  if (matchMedia("(pointer:coarse)").matches) { location.href = "sms:?&body=" + encodeURIComponent(text + "\n" + url); return; }
+  try { await navigator.clipboard.writeText(text + "\n" + url); msg("Link Copied"); } catch (e) { msg("Copy this link: " + url); }
+}
+document.getElementById("share").onclick = shareApp;
 window.__brief = { exportTaps }; boot();
 })();

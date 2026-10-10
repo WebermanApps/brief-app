@@ -7,6 +7,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;600&family=Khand:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<!--mw-polish--><style id="mw-polish">
+/* MW polish layer: /workspace/ops/brand/app-polish-spec.md (Oct 10, 2026). Light mode, brand motion, 44px targets. */
+:root{--mw-ease:cubic-bezier(.2,.8,.2,1);--mw-dur:180ms;--mw-ink:#171717;--mw-grey:#737373;--mw-line:#E5E5E5;--mw-jungle:#0B6E4F;--mw-lagoon:#05668D;--mw-terra:#C1502E}
+html{color-scheme:light only}
+:where(button,.btn,a.btn,[role=button]){transition:translate var(--mw-dur) var(--mw-ease),scale var(--mw-dur) var(--mw-ease),box-shadow var(--mw-dur) var(--mw-ease),background-color var(--mw-dur) var(--mw-ease)}
+@media (hover:hover){:where(button,.btn,a.btn):not(:disabled):not(.leaflet-container *):hover{translate:0 -1px;scale:1.03;box-shadow:0 6px 18px rgba(10,10,10,.12)}}
+:where(button,.btn):not(:disabled):not(.leaflet-container *):active{scale:.97}
+:where(a:not(.btn)){text-underline-offset:4px}
+:focus-visible{outline:2px solid var(--mw-lagoon);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+.mw-share{min-height:44px;min-width:44px;padding:0 14px;border:2px solid var(--mw-ink);background:#fff;color:var(--mw-ink);font-family:Khand,Hind,system-ui,sans-serif;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;border-radius:0;cursor:pointer}
+.mw-share-float{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50}
+
+/* Brief: dense rows, tinted sections (terracotta / lagoon / jungle at ~8%), one per section */
+.cards{gap:.6rem!important}
+.card{padding:.8rem 1rem!important;box-shadow:none!important}
+.cards>.card:nth-child(3n+1){background:#C1502E14!important}
+.cards>.card:nth-child(3n+2){background:#05668D14!important}
+.cards>.card:nth-child(3n+3){background:#0B6E4F14!important}
+
+</style><!--/mw-polish-->
 </head><body>
 <header class="top"><div class="wrap bar">
   <span class="wordmark">MAX WEBERMAN</span>

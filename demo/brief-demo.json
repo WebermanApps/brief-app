@@ -1,12 +1,360 @@
 {
-  "date": "2026-10-12",
-  "items": [
-    {"id":"demo-3","rank":3,"title":"Sample Item C: Form Ready","detail":"Demo only. A sample form is ready for review.","lane":"Admin","options":["approve","park","done","ask"]},
-    {"id":"demo-1","rank":1,"title":"Sample Item A: Deadline Soon","detail":"Demo only. A sample task has a deadline this week.","lane":"Construction","options":["approve","park","done","ask"]},
-    {"id":"demo-2","rank":2,"title":"Sample Item B: Draft Ready","detail":"Demo only. A sample message draft is ready to send.","lane":"Property","options":["approve","park","ask"]},
-    {"id":"demo-4","rank":4,"title":"Sample Item D: Call To Schedule","detail":"Demo only. Pick an evening for a sample call.","lane":"Property","options":["park","done","ask"]},
-    {"id":"demo-5","rank":5,"title":"Sample Item E: Receipt Ready","detail":"Demo only. A sample receipt bundle is ready.","lane":"Admin","options":["approve","park","done","ask"]},
-    {"id":"demo-6","rank":6,"title":"Sample Item F: Overflow","detail":"Should NOT render (max 5 cards).","lane":"Admin","options":["done"]}
-  ],
-  "chart": null
+ "date": "2026-10-12",
+ "items": [
+  {
+   "id": "demo-3",
+   "rank": 3,
+   "title": "Sample Item C: Form Ready",
+   "detail": "Demo only. A sample form is ready for review.",
+   "lane": "Admin",
+   "options": [
+    "approve",
+    "park",
+    "done",
+    "ask"
+   ]
+  },
+  {
+   "id": "demo-1",
+   "rank": 1,
+   "title": "Sample Item A: Deadline Soon",
+   "detail": "Demo only. A sample task has a deadline this week.",
+   "lane": "Construction",
+   "options": [
+    "approve",
+    "park",
+    "done",
+    "ask"
+   ]
+  },
+  {
+   "id": "demo-2",
+   "rank": 2,
+   "title": "Sample Item B: Draft Ready",
+   "detail": "Demo only. A sample message draft is ready to send.",
+   "lane": "Property",
+   "options": [
+    "approve",
+    "park",
+    "ask"
+   ]
+  },
+  {
+   "id": "demo-4",
+   "rank": 4,
+   "title": "Sample Item D: Call To Schedule",
+   "detail": "Demo only. Pick an evening for a sample call.",
+   "lane": "Property",
+   "options": [
+    "park",
+    "done",
+    "ask"
+   ]
+  },
+  {
+   "id": "demo-5",
+   "rank": 5,
+   "title": "Sample Item E: Receipt Ready",
+   "detail": "Demo only. A sample receipt bundle is ready.",
+   "lane": "Admin",
+   "options": [
+    "approve",
+    "park",
+    "done",
+    "ask"
+   ]
+  },
+  {
+   "id": "demo-6",
+   "rank": 6,
+   "title": "Sample Item F: Overflow",
+   "detail": "Should NOT render (max 5 cards).",
+   "lane": "Admin",
+   "options": [
+    "done"
+   ]
+  }
+ ],
+ "chart": null,
+ "agents": [
+  {
+   "id": "folio",
+   "name": "Folio",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only.",
+    "Sample Highlight C: demo only."
+   ],
+   "asks": [
+    {
+     "id": "ask1",
+     "title": "Sample Ask 1",
+     "detail": "Demo only. A neutral sample question for review."
+    },
+    {
+     "id": "ask2",
+     "title": "Sample Ask 2",
+     "detail": "Demo only. A neutral sample question for review."
+    }
+   ],
+   "status": "Demo only. Folio is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ]
+  },
+  {
+   "id": "prop",
+   "name": "Prop",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only.",
+    "Sample Highlight C: demo only."
+   ],
+   "asks": [
+    {
+     "id": "ask1",
+     "title": "Sample Ask 1",
+     "detail": "Demo only. A neutral sample question for review."
+    },
+    {
+     "id": "ask2",
+     "title": "Sample Ask 2",
+     "detail": "Demo only. A neutral sample question for review."
+    }
+   ],
+   "status": "Demo only. Prop is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ]
+  },
+  {
+   "id": "construction",
+   "name": "Construction",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only.",
+    "Sample Highlight C: demo only."
+   ],
+   "asks": [
+    {
+     "id": "ask1",
+     "title": "Sample Ask 1",
+     "detail": "Demo only. A neutral sample question for review."
+    },
+    {
+     "id": "ask2",
+     "title": "Sample Ask 2",
+     "detail": "Demo only. A neutral sample question for review."
+    }
+   ],
+   "status": "Demo only. Construction is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ]
+  },
+  {
+   "id": "scout",
+   "name": "Scout",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only.",
+    "Sample Highlight C: demo only."
+   ],
+   "asks": [
+    {
+     "id": "ask1",
+     "title": "Sample Ask 1",
+     "detail": "Demo only. A neutral sample question for review."
+    },
+    {
+     "id": "ask2",
+     "title": "Sample Ask 2",
+     "detail": "Demo only. A neutral sample question for review."
+    }
+   ],
+   "status": "Demo only. Scout is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ]
+  },
+  {
+   "id": "blueprint",
+   "name": "Blueprint",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only.",
+    "Sample Highlight C: demo only."
+   ],
+   "asks": [
+    {
+     "id": "ask1",
+     "title": "Sample Ask 1",
+     "detail": "Demo only. A neutral sample question for review."
+    },
+    {
+     "id": "ask2",
+     "title": "Sample Ask 2",
+     "detail": "Demo only. A neutral sample question for review."
+    }
+   ],
+   "status": "Demo only. Blueprint is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ],
+   "link": "https://example.com/"
+  },
+  {
+   "id": "coach",
+   "name": "Coach",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only.",
+    "Sample Highlight C: demo only."
+   ],
+   "asks": [
+    {
+     "id": "ask1",
+     "title": "Sample Ask 1",
+     "detail": "Demo only. A neutral sample question for review."
+    },
+    {
+     "id": "ask2",
+     "title": "Sample Ask 2",
+     "detail": "Demo only. A neutral sample question for review."
+    }
+   ],
+   "status": "Demo only. Coach is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ]
+  },
+  {
+   "id": "dump",
+   "name": "Dump",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only."
+   ],
+   "asks": [
+    {
+     "id": "ask1",
+     "title": "Sample Ask 1",
+     "detail": "Demo only. A neutral sample question for review."
+    }
+   ],
+   "status": "Demo only. Dump is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ]
+  },
+  {
+   "id": "thai",
+   "name": "Thai",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only."
+   ],
+   "asks": [],
+   "status": "Demo only. Thai is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ]
+  },
+  {
+   "id": "health",
+   "name": "Health",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only."
+   ],
+   "asks": [
+    {
+     "id": "ask1",
+     "title": "Sample Ask 1",
+     "detail": "Demo only. A neutral sample question for review."
+    }
+   ],
+   "status": "Demo only. Health is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ]
+  },
+  {
+   "id": "wellnest",
+   "name": "Wellnest",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only."
+   ],
+   "asks": [],
+   "status": "Demo only. Wellnest is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ]
+  },
+  {
+   "id": "miles",
+   "name": "Miles",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only."
+   ],
+   "asks": [
+    {
+     "id": "ask1",
+     "title": "Sample Ask 1",
+     "detail": "Demo only. A neutral sample question for review."
+    }
+   ],
+   "status": "Demo only. Miles is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ]
+  },
+  {
+   "id": "ted-talk",
+   "name": "Ted Talk",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only."
+   ],
+   "asks": [],
+   "status": "Demo only. Ted Talk is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ]
+  },
+  {
+   "id": "japan-cottage",
+   "name": "Japan Cottage",
+   "highlights": [
+    "Sample Highlight A: demo only.",
+    "Sample Highlight B: demo only."
+   ],
+   "asks": [
+    {
+     "id": "ask1",
+     "title": "Sample Ask 1",
+     "detail": "Demo only. A neutral sample question for review."
+    }
+   ],
+   "status": "Demo only. Japan Cottage is on track in this sample. No real data is shown.",
+   "recent": [
+    "Sample change one (demo only).",
+    "Sample change two (demo only)."
+   ]
+  }
+ ]
 }

@@ -13,7 +13,7 @@
   <button id="connect" class="btn sm">Connect Dropbox</button>
   <button id="demo" class="btn sm">Demo Mode</button></div>
 </div></header>
-<main class="wrap">
+<main class="wrap"><div id="home">
   <h1 id="heading">Morning Brief</h1>
   <p id="date" class="muted"></p>
   <div id="status" class="status" role="status"><span id="saved">0 Saved</span> · <span id="unsaved">0 Unsaved</span>
@@ -21,7 +21,10 @@
   <p id="msg" class="muted"></p>
   <div class="grid"><section id="cards" class="cards"></section>
   <aside><h2>Chart</h2><div id="chart" class="card chartbox"></div></aside></div>
+  <section id="agents-wrap" hidden><h2>Agent Sections</h2><div id="tiles" class="tiles"></div></section>
+  </div>
+  <section id="detail" hidden></section>
 </main>
-<footer class="foot"><div class="wrap">MAX WEBERMAN · Brief App Pilot v1 · Local Build</div></footer>
+<footer class="foot"><div class="wrap">MAX WEBERMAN · Brief App v2</div></footer>
 <script src="config.js"></script><script src="app.js"></script>
 </body></html>

@@ -44,3 +44,6 @@ textarea{flex:1;min-width:12rem;min-height:3rem}
 #detail{margin:2rem 0 3rem}#detail .sub{border-top:1px solid var(--mw-border);padding-top:1.5rem;margin-top:1.5rem}
 #detail .asks{display:flex;flex-direction:column;gap:1rem;margin:1rem 0}
 #detail ul.recent{padding-left:1.1rem}
+.card.parked{opacity:.55;background:var(--mw-secondary)}
+.pill{display:inline-block;margin:.25rem 0 .35rem;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:var(--mw-tracking-label);padding:.15rem .5rem;border:2px solid var(--mw-primary);border-radius:0;color:var(--mw-primary)}
+.pill.on{background:var(--mw-primary);color:var(--mw-primary-foreground)}

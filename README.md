@@ -10,6 +10,6 @@ Setup: create a Dropbox app with "App folder" access named BriefApp, give it the
 ## v2: Agent Sections
 Below the ranked Top Items cards, a grid of tiles: Folio, Prop, Construction, Scout, Blueprint, Coach, and Other (Dump, Thai, Health, Wellnest, Miles, Ted Talk, Japan Cottage; any unknown agent id also lands in Other). Each tile shows up to 3 highlights and a badge with the open-ask count. Tapping a tile opens `#/agent/<id>` (or `#/agent/other`) with a back button: status, open asks (Approve / Park With Date / Done / Ask Me), Recent Changes, and an optional link.
 
-Optional brief field: `agents: [{ id, name, highlights[], asks: [{ id, title, detail }], status, recent[], link? }]`. Briefs without `agents` still work (no tiles shown). Ask taps go in the same taps file with ids prefixed by agent id, e.g. `folio:ask1`. An ask counts as open until it has any tap.
+Optional brief field: `agents: [{ id, name, highlights[], asks: [{ id, title, detail }], status, recent[], link? }]`. Briefs without `agents` still work (no tiles shown). Ask taps go in the same taps file with ids prefixed by agent id, e.g. `folio:ask1`. Tap states (asks and Top Items, latest tap wins): Approve and Done close the item. Park dims it as "Parked Until <date>" and it no longer counts as open. Ask Me shows "Waiting on Mo" and it still counts as open. Mo compiles `agents` at 7:18.
 
 Hover motion follows `.mw-hover` from the brand tokens (180ms ease-out, slight scale/lift, links nudge), off under prefers-reduced-motion.

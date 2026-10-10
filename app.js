@@ -84,8 +84,10 @@ function renderCards() {
 function cardHTML(it, taps, lbl) {
     const last = taps.filter((t) => t.id === it.id).pop(), opts = (it.options || []).filter((o) => LABEL[o]);
     const tapTxt = last ? `Last Tap: ${LABEL[last.action]}${last.park_date ? " → " + last.park_date : ""}${last.note ? " · “" + esc(last.note) + "”" : ""} · ${last._saved ? "Saved" : "Unsaved"}` : "";
-    return `<article class="card mw-hover${last?.action === "done" ? " done" : ""}" data-id="${esc(it.id)}">
-      <div class="label">${lbl}</div><h3>${esc(it.title)}</h3><p>${esc(it.detail)}</p>
+    const st = !last ? "" : last.action === "park" ? " parked" : last.action === "ask" ? " waiting" : " done";
+    const flag = last?.action === "park" ? `<span class="pill" data-state="parked">Parked Until ${esc(last.park_date)}</span>` : last?.action === "ask" ? `<span class="pill on" data-state="waiting">Waiting on Mo</span>` : last ? `<span class="pill" data-state="closed">${last.action === "done" ? "Done" : "Approved"}</span>` : "";
+    return `<article class="card mw-hover${st}" data-id="${esc(it.id)}">
+      <div class="label">${lbl}</div>${flag}<h3>${esc(it.title)}</h3><p>${esc(it.detail)}</p>
       <div class="actions">${opts.map((o) => `<button class="btn mw-hover${last?.action === o ? " on" : ""}" data-act="${o}">${LABEL[o]}</button>`).join("")}</div>
       ${opts.includes("park") ? `<div class="extra" data-x="park"><input type="date" aria-label="Park date" min="${today()}"><button class="btn sm mw-hover" data-confirm="park">Confirm Park</button></div>` : ""}
       ${opts.includes("ask") ? `<div class="extra" data-x="ask"><textarea aria-label="Question" placeholder="What do you want to ask?"></textarea><button class="btn sm mw-hover" data-confirm="ask">Send Question</button></div>` : ""}
@@ -95,7 +97,9 @@ function cardHTML(it, taps, lbl) {
 // ---- v2 agent sections ----
 const agents = () => (Array.isArray(brief?.agents) ? brief.agents : []);
 const askId = (ag, a) => `${ag.id}:${a.id}`;
-const openAsks = (ag, taps) => (ag.asks || []).filter((a) => !taps.some((t) => t.id === askId(ag, a))).length;
+// Mo's rules: Approve/Done close, Park = parked (not open), Ask Me = Waiting on Mo (still open)
+const isOpen = (id, taps) => { const l = taps.filter((t) => t.id === id).pop(); return !l || l.action === "ask"; };
+const openAsks = (ag, taps) => (ag.asks || []).filter((a) => isOpen(askId(ag, a), taps)).length;
 function groups() {
   const ags = agents(), main = MAIN.map((id) => ags.find((a) => a.id === id)).filter(Boolean);
   const other = ags.filter((a) => !MAIN.includes(a.id)).sort((x, y) => (OTHER.indexOf(x.id) + 99) % 99 - (OTHER.indexOf(y.id) + 99) % 99);

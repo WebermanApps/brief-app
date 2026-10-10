@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-12",
+  "items": [
+    {"id":"demo-3","rank":3,"title":"Sample Item C: Form Ready","detail":"Demo only. A sample form is ready for review.","lane":"Admin","options":["approve","park","done","ask"]},
+    {"id":"demo-1","rank":1,"title":"Sample Item A: Deadline Soon","detail":"Demo only. A sample task has a deadline this week.","lane":"Construction","options":["approve","park","done","ask"]},
+    {"id":"demo-2","rank":2,"title":"Sample Item B: Draft Ready","detail":"Demo only. A sample message draft is ready to send.","lane":"Property","options":["approve","park","ask"]},
+    {"id":"demo-4","rank":4,"title":"Sample Item D: Call To Schedule","detail":"Demo only. Pick an evening for a sample call.","lane":"Property","options":["park","done","ask"]},
+    {"id":"demo-5","rank":5,"title":"Sample Item E: Receipt Ready","detail":"Demo only. A sample receipt bundle is ready.","lane":"Admin","options":["approve","park","done","ask"]},
+    {"id":"demo-6","rank":6,"title":"Sample Item F: Overflow","detail":"Should NOT render (max 5 cards).","lane":"Admin","options":["done"]}
+  ],
+  "chart": null
+}

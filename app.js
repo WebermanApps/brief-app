@@ -137,7 +137,7 @@ function renderChart(ch) {
   const placeholder = !ch || !Array.isArray(ch.values) || !ch.values.length;
   const c = placeholder ? { title: "Placeholder Chart (Sample Data)", labels: ["Mon", "Tue", "Wed", "Thu", "Fri"], values: [3, 5, 2, 4, 1] } : ch;
   const W = 320, H = 180, P = 24, max = Math.max(...c.values, 1), bw = (W - 2 * P) / c.values.length;
-  const bars = c.values.map((v, i) => { const h = (v / max) * (H - 2 * P); return `<rect x="${P + i * bw + 4}" y="${H - P - h}" width="${bw - 8}" height="${h}" fill="${placeholder ? "#a3a3a3" : "#171717"}"/><text x="${P + i * bw + bw / 2}" y="${H - 6}" text-anchor="middle" font-size="11" fill="#737373">${esc(c.labels?.[i] ?? "")}</text>`; }).join("");
+  const bars = c.values.map((v, i) => { const h = (v / max) * (H - 2 * P); return `<rect x="${P + i * bw + 4}" y="${H - P - h}" width="${bw - 8}" height="${h}" fill="${placeholder ? "#d4d4d4" : "#525252"}"/><text x="${P + i * bw + bw / 2}" y="${H - 6}" text-anchor="middle" font-size="11" fill="#737373">${esc(c.labels?.[i] ?? "")}</text>`; }).join("");
   $("#chart").innerHTML = `<div class="label">${esc(c.title)}</div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(c.title)}"><line x1="${P}" y1="${H - P}" x2="${W - P}" y2="${H - P}" stroke="#e5e5e5"/>${bars}</svg>${placeholder ? '<p class="muted" style="font-size:.8rem;margin:.25rem 0 0">Placeholder. Not real data.</p>' : ""}`;
 }
 function render() {

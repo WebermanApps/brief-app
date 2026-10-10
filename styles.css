@@ -53,3 +53,11 @@ textarea{flex:1;min-width:12rem;min-height:3rem}
 @media(min-width:1200px){#detail .agent-detail:has(.subs){max-width:none}.subs{display:grid;grid-template-columns:1fr 1fr;gap:0 2.5rem}.subs .sub:nth-child(-n+2){border-top:0;margin-top:0;padding-top:0}}
 @media(min-width:1600px){.tiles{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:480px){.bar-right{width:100%}.bar-right #mode{flex-basis:100%}.bar-right .btn{flex:1;white-space:nowrap}.status .btn{flex:1}.actions .btn{flex:1 1 auto}}
+/* Light mode only (Max, Oct 10, 2026): no dark fills or sections */
+:root{color-scheme:light}
+.foot{background:var(--mw-secondary);color:var(--mw-muted-text);border-top:1px solid var(--mw-border)}
+.foot a{color:var(--mw-foreground)}
+.badge{background:#fff;color:var(--mw-foreground);border-color:var(--mw-primary)}
+.pill.on{background:#fff;color:var(--mw-foreground);border-color:var(--mw-primary);box-shadow:inset 0 0 0 1px var(--mw-primary)}
+.btn.on{background:var(--mw-secondary);color:var(--mw-foreground);box-shadow:inset 0 0 0 1px var(--mw-primary)}
+.btn.on:hover{background:var(--mw-primary);color:var(--mw-primary-foreground)}

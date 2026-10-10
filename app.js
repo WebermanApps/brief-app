@@ -108,6 +108,8 @@ function groups() {
 function renderAgents() {
   const { main, other } = groups(), taps = getTaps();
   $("#agents-wrap").hidden = !agents().length;
+  // Hub support: cache only the open-ask COUNT (no content) for the App Hub on the same origin. Dropbox mode only.
+  if (mode === "dropbox") localStorage.setItem("briefapp.openAsks", JSON.stringify({ date: brief.date, mode, n: agents().reduce((s, ag) => s + openAsks(ag, taps), 0), ts: new Date().toISOString() }));
   const tile = (key, name, hl, n) => `<a class="tile card mw-hover" href="#/agent/${esc(key)}" data-tile="${esc(key)}">
     <h3><span>${esc(name)} <span class="arrow" aria-hidden="true">→</span></span><span class="badge${n ? "" : " zero"}" title="Open Asks" aria-label="${n} open asks">${n}</span></h3>
     <ul>${hl.slice(0, 3).map((h) => `<li>${esc(h)}</li>`).join("")}</ul></a>`;

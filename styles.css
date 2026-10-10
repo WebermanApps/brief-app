@@ -9,7 +9,8 @@ h1{font-size:3.5rem;margin-top:2rem}h2{font-size:1.75rem}h3{font-size:1.6rem}
 .label{text-transform:uppercase;letter-spacing:var(--mw-tracking-label);font-size:.75rem;color:var(--mw-muted-text);font-weight:600}
 .muted{color:var(--mw-muted-text)}
 .btn{font-family:var(--mw-font-body);background:transparent;color:var(--mw-primary);border:2px solid var(--mw-primary);border-radius:0;text-transform:uppercase;letter-spacing:var(--mw-tracking-label);font-weight:600;font-size:.8rem;padding:.75rem 1.25rem;cursor:pointer}
-.btn:hover,.btn:focus-visible,.btn.on{background:var(--mw-primary);color:var(--mw-primary-foreground)}.btn.sm{padding:.4rem .8rem;font-size:.7rem}
+.btn:hover,.btn:focus-visible,.btn.on{background:var(--mw-primary);color:var(--mw-primary-foreground)}.btn.sm{padding:.4rem .9rem;font-size:.7rem;min-height:44px;min-width:44px}
+.btn{min-height:44px}
 .status{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;padding:.75rem 1rem;background:var(--mw-secondary);border:1px solid var(--mw-border);border-radius:var(--mw-radius);margin:1rem 0}
 .grid{display:grid;grid-template-columns:1fr 22rem;gap:2rem;margin-bottom:3rem}
 .cards{display:flex;flex-direction:column;gap:1rem}
@@ -47,3 +48,8 @@ textarea{flex:1;min-width:12rem;min-height:3rem}
 .card.parked{opacity:.55;background:var(--mw-secondary)}
 .pill{display:inline-block;margin:.25rem 0 .35rem;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:var(--mw-tracking-label);padding:.15rem .5rem;border:2px solid var(--mw-primary);border-radius:0;color:var(--mw-primary)}
 .pill.on{background:var(--mw-primary);color:var(--mw-primary-foreground)}
+/* Phone and Desktop Fit (Oct 10, 2026) */
+#detail .agent-detail{max-width:56rem}
+@media(min-width:1200px){#detail .agent-detail:has(.subs){max-width:none}.subs{display:grid;grid-template-columns:1fr 1fr;gap:0 2.5rem}.subs .sub:nth-child(-n+2){border-top:0;margin-top:0;padding-top:0}}
+@media(min-width:1600px){.tiles{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:480px){.bar-right{width:100%}.bar-right #mode{flex-basis:100%}.bar-right .btn{flex:1;white-space:nowrap}.status .btn{flex:1}.actions .btn{flex:1 1 auto}}

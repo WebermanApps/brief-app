@@ -130,7 +130,7 @@ function renderDetail() {
   if (!show) { $("#detail").innerHTML = ""; return; }
   const back = `<button id="back" class="btn sm mw-hover">← Back To Brief</button>`;
   $("#detail").innerHTML = back + `<div class="agent-detail" data-agent="${esc(m[1])}">` + (ag ? agentHTML(ag, taps, "h1")
-    : `<h1>Other</h1>` + other.map((o) => `<section class="sub" data-sub="${esc(o.id)}">${agentHTML(o, taps, "h2")}</section>`).join("")) + `</div>`;
+    : `<h1>Other</h1><div class="subs">` + other.map((o) => `<section class="sub" data-sub="${esc(o.id)}">${agentHTML(o, taps, "h2")}</section>`).join("") + `</div>`) + `</div>`;
 }
 function renderAll() { renderCards(); renderAgents(); renderDetail(); }
 function renderChart(ch) {

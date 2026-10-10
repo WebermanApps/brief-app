@@ -138,6 +138,9 @@ function renderDetail() {
 // and reach the DOM only after an explicit Show Text tap. Ids in the taps file: "send:<id>". ----
 const sends = () => (Array.isArray(brief?.send_items) ? brief.send_items : []);
 const sendId = (s) => "send:" + s.id, shown = new Set(), expanded = new Set();
+// Mo (Oct 10): only Sent and Park close a send item; Park dims it until its date (on/after the date it is open again).
+const sendClosed = (last) => !!last && (last.action === "sent" || (last.action === "park" && last.park_date > today()));
+const openSends = (taps) => sends().filter((s) => !sendClosed(taps.filter((t) => t.id === sendId(s)).pop())).length;
 const sendState = (s, taps) => { const l = taps.filter((t) => t.id === sendId(s)).pop(); return l ? l.action : ""; };
 const mailto = (s) => "mailto:" + encodeURIComponent(s.to || "") + "?subject=" + encodeURIComponent(s.subject || "") + "&body=" + encodeURIComponent(s.body || "");
 function renderSends() {
@@ -145,10 +148,11 @@ function renderSends() {
   const az = (x, y) => String(x.label).localeCompare(String(y.label));
   list.sort(by === "za" ? (x, y) => -az(x, y) : by === "lane" ? (x, y) => String(x.lane).localeCompare(String(y.lane)) || az(x, y) : by === "status" ? (x, y) => rank(x) - rank(y) || az(x, y) : az);
   $("#send-wrap").hidden = !list.length;
+  if (mode === "dropbox") localStorage.setItem("briefapp.openSends", JSON.stringify({ date: brief.date, mode, n: openSends(taps), ts: new Date().toISOString() }));
   $("#send-list").innerHTML = list.map((s) => {
     const id = sendId(s), last = taps.filter((t) => t.id === id).pop(), st = last?.action || "", open = expanded.has(id);
     const pill = st === "sent" ? "Sent" : st === "park" ? "Parked Until " + esc(last.park_date) : st ? LABEL[st] : "Ready";
-    return `<article class="card sendrow${st === "sent" ? " done" : st === "park" ? " parked" : ""}" data-id="${esc(id)}">
+    return `<article class="card sendrow${st === "sent" ? " done" : st === "park" && sendClosed(last) ? " parked" : ""}" data-id="${esc(id)}">
       <button class="rowhead" data-act="toggle" aria-expanded="${open}"><span class="rowlabel">${esc(s.label)}</span><span class="rowmeta"><span class="label">${esc(s.lane)}</span><span class="pill" data-state="${esc(st || "ready")}">${pill}</span><span class="chev" aria-hidden="true">${open ? "−" : "+"}</span></span></button>
       <div class="rowbody"${open ? "" : " hidden"}>
         <div class="actions"><button class="btn mw-hover" data-act="copied">Copy Text</button><button class="btn mw-hover" data-act="mailed">Open Mail</button><button class="btn mw-hover${st === "sent" ? " on" : ""}" data-act="sent">Sent</button><button class="btn mw-hover${st === "park" ? " on" : ""}" data-act="park">Park With Date</button><button class="btn sm mw-hover" data-act="show">${shown.has(id) ? "Hide Text" : "Show Text"}</button></div>
@@ -165,7 +169,7 @@ document.getElementById("send-list").addEventListener("click", async (e) => {
   if (act === "show") { shown.has(id) ? shown.delete(id) : shown.add(id); return renderSends(); }
   if (act === "copied") { const txt = `To: ${s.to}\nSubject: ${s.subject}\n\n${s.body}`; try { await navigator.clipboard.writeText(txt); msg("Text Copied"); } catch (er) { msg("Copy failed. Tap Show Text to copy by hand."); } return record(id, "copied"); }
   if (act === "mailed") { record(id, "mailed"); window.__lastMailto = mailto(s); location.href = mailto(s); return; }
-  if (act === "sent") return record(id, "sent");
+  if (act === "sent") { record(id, "sent"); if (s.top_item_id) record(String(s.top_item_id), "done"); return; }
   if (act === "park") return card.querySelector(".extra").classList.toggle("open");
   if (b.dataset.confirm === "park") { const d = card.querySelector("input[type=date]").value; if (!d) return msg("Pick a park date first."); return record(id, "park", { park_date: d }); }
 });

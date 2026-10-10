@@ -372,7 +372,8 @@
    "to": "friend@example.com",
    "subject": "Demo: Thank You",
    "body": "Hi,\n\nThis is fake demo text for a thank-you note.\n\nBest,\nMax",
-   "lane": "Personal"
+   "lane": "Personal",
+   "top_item_id": "demo-2"
   },
   {
    "id": "s2",

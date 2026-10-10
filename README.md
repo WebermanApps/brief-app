@@ -13,3 +13,7 @@ Below the ranked Top Items cards, a grid of tiles: Folio, Prop, Construction, Sc
 Optional brief field: `agents: [{ id, name, highlights[], asks: [{ id, title, detail }], status, recent[], link? }]`. Briefs without `agents` still work (no tiles shown). Ask taps go in the same taps file with ids prefixed by agent id, e.g. `folio:ask1`. Tap states (asks and Top Items, latest tap wins): Approve and Done close the item. Park dims it as "Parked Until <date>" and it no longer counts as open. Ask Me shows "Waiting on Mo" and it still counts as open. Mo compiles `agents` at 7:18.
 
 Hover motion follows `.mw-hover` from the brand tokens (180ms ease-out, slight scale/lift, links nudge), off under prefers-reduced-motion.
+
+## v3: Send It Now
+Optional brief field: `send_items: [{ id, label, to, subject, body, lane, top_item_id? }]`. Rows show only the neutral label; To/Subject/Body appear only after Show Text. Buttons: Copy Text, Open Mail, Sent, Park With Date. Taps use id `send:<id>` and actions copied / mailed / sent / park. Sent also writes a `done` tap for `top_item_id`. Only Sent and Park (until its date) close a row.
+Dropbox redirect URIs for the shared BriefApp app: https://webermanapps.github.io/brief-app/ and https://webermanapps.github.io/decision-deck/

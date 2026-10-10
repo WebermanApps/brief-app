@@ -4,7 +4,7 @@ const LS = { token: "briefapp.dbx.token", verifier: "briefapp.dbx.verifier", mod
 const MAIN = ["folio", "prop", "construction", "scout", "blueprint", "coach"];
 const OTHER = ["dump", "thai", "health", "wellnest", "miles", "ted-talk", "japan-cottage"];
 const OPTS = ["approve", "park", "done", "ask"];
-const LABEL = { approve: "Approve", park: "Park With Date", done: "Done", ask: "Ask Me" };
+const LABEL = { approve: "Approve", park: "Park With Date", done: "Done", ask: "Ask Me", copied: "Copied", mailed: "Mailed", sent: "Sent" };
 const today = () => new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD, device local
 let brief = null, mode = localStorage.getItem(LS.mode) || "none";
 const redirect = () => location.origin + location.pathname;
@@ -132,7 +132,42 @@ function renderDetail() {
   $("#detail").innerHTML = back + `<div class="agent-detail" data-agent="${esc(m[1])}">` + (ag ? agentHTML(ag, taps, "h1")
     : `<h1>Other</h1><div class="subs">` + other.map((o) => `<section class="sub" data-sub="${esc(o.id)}">${agentHTML(o, taps, "h2")}</section>`).join("") + `</div>`) + `</div>`;
 }
-function renderAll() { renderCards(); renderAgents(); renderDetail(); }
+// ---- v3 Send It Now. PRIVACY: card shows only the neutral label; to/subject/body stay in memory
+// and reach the DOM only after an explicit Show Text tap. Ids in the taps file: "send:<id>". ----
+const sends = () => (Array.isArray(brief?.send_items) ? brief.send_items : []);
+const sendId = (s) => "send:" + s.id, shown = new Set(), expanded = new Set();
+const sendState = (s, taps) => { const l = taps.filter((t) => t.id === sendId(s)).pop(); return l ? l.action : ""; };
+const mailto = (s) => "mailto:" + encodeURIComponent(s.to || "") + "?subject=" + encodeURIComponent(s.subject || "") + "&body=" + encodeURIComponent(s.body || "");
+function renderSends() {
+  const taps = getTaps(), list = [...sends()], by = $("#send-sort").value, rank = (s) => ({ "": 0, copied: 1, mailed: 1, park: 2, sent: 3 }[sendState(s, taps)]);
+  const az = (x, y) => String(x.label).localeCompare(String(y.label));
+  list.sort(by === "za" ? (x, y) => -az(x, y) : by === "lane" ? (x, y) => String(x.lane).localeCompare(String(y.lane)) || az(x, y) : by === "status" ? (x, y) => rank(x) - rank(y) || az(x, y) : az);
+  $("#send-wrap").hidden = !list.length;
+  $("#send-list").innerHTML = list.map((s) => {
+    const id = sendId(s), last = taps.filter((t) => t.id === id).pop(), st = last?.action || "", open = expanded.has(id);
+    const pill = st === "sent" ? "Sent" : st === "park" ? "Parked Until " + esc(last.park_date) : st ? LABEL[st] : "Ready";
+    return `<article class="card sendrow${st === "sent" ? " done" : st === "park" ? " parked" : ""}" data-id="${esc(id)}">
+      <button class="rowhead" data-act="toggle" aria-expanded="${open}"><span class="rowlabel">${esc(s.label)}</span><span class="rowmeta"><span class="label">${esc(s.lane)}</span><span class="pill" data-state="${esc(st || "ready")}">${pill}</span><span class="chev" aria-hidden="true">${open ? "−" : "+"}</span></span></button>
+      <div class="rowbody"${open ? "" : " hidden"}>
+        <div class="actions"><button class="btn mw-hover" data-act="copied">Copy Text</button><button class="btn mw-hover" data-act="mailed">Open Mail</button><button class="btn mw-hover${st === "sent" ? " on" : ""}" data-act="sent">Sent</button><button class="btn mw-hover${st === "park" ? " on" : ""}" data-act="park">Park With Date</button><button class="btn sm mw-hover" data-act="show">${shown.has(id) ? "Hide Text" : "Show Text"}</button></div>
+        <div class="extra" data-x="park"><input type="date" aria-label="Park date" min="${today()}"><button class="btn sm mw-hover" data-confirm="park">Confirm Park</button></div>
+        ${shown.has(id) ? `<div class="sendtext"><div><span class="label">To</span> ${esc(s.to)}</div><div><span class="label">Subject</span> ${esc(s.subject)}</div><pre>${esc(s.body)}</pre></div>` : ""}
+        <div class="tapline">${last ? "Last Tap: " + LABEL[st] + " · " + (last._saved ? "Saved" : "Unsaved") : ""}</div></div></article>`;
+  }).join("");
+}
+document.getElementById("send-sort").onchange = () => renderSends();
+document.getElementById("send-list").addEventListener("click", async (e) => {
+  const b = e.target.closest("button"), card = e.target.closest(".sendrow"); if (!b || !card) return;
+  const id = card.dataset.id, s = sends().find((x) => sendId(x) === id), act = b.dataset.act; if (!s) return;
+  if (act === "toggle") { expanded.has(id) ? expanded.delete(id) : expanded.add(id); return renderSends(); }
+  if (act === "show") { shown.has(id) ? shown.delete(id) : shown.add(id); return renderSends(); }
+  if (act === "copied") { const txt = `To: ${s.to}\nSubject: ${s.subject}\n\n${s.body}`; try { await navigator.clipboard.writeText(txt); msg("Text Copied"); } catch (er) { msg("Copy failed. Tap Show Text to copy by hand."); } return record(id, "copied"); }
+  if (act === "mailed") { record(id, "mailed"); window.__lastMailto = mailto(s); location.href = mailto(s); return; }
+  if (act === "sent") return record(id, "sent");
+  if (act === "park") return card.querySelector(".extra").classList.toggle("open");
+  if (b.dataset.confirm === "park") { const d = card.querySelector("input[type=date]").value; if (!d) return msg("Pick a park date first."); return record(id, "park", { park_date: d }); }
+});
+function renderAll() { renderCards(); renderSends(); renderAgents(); renderDetail(); }
 function renderChart(ch) {
   const placeholder = !ch || !Array.isArray(ch.values) || !ch.values.length;
   const c = placeholder ? { title: "Placeholder Chart (Sample Data)", labels: ["Mon", "Tue", "Wed", "Thu", "Fri"], values: [3, 5, 2, 4, 1] } : ch;
@@ -143,13 +178,13 @@ function renderChart(ch) {
 function render() {
   $("#heading").textContent = mode === "demo" ? "Morning Brief (Demo)" : "Morning Brief";
   $("#date").textContent = new Date(brief.date + "T00:00").toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
-  renderCards(); renderAgents(); renderDetail(); renderChart(brief.chart); renderStatus();
+  renderCards(); renderSends(); renderAgents(); renderDetail(); renderChart(brief.chart); renderStatus();
 }
 
 // ---- Events ----
 document.querySelector("main").addEventListener("click", (e) => {
   if (e.target.id === "back") { location.hash = "#/"; return; }
-  const card = e.target.closest(".card[data-id]"); if (!card) return; const id = card.dataset.id;
+  const card = e.target.closest(".card[data-id]"); if (!card || card.classList.contains("sendrow")) return; const id = card.dataset.id;
   const act = e.target.dataset.act, conf = e.target.dataset.confirm;
   if (act === "approve" || act === "done") return record(id, act);
   if (act) { card.querySelectorAll(".extra").forEach((x) => x.classList.toggle("open", x.dataset.x === act && !x.classList.contains("open"))); return; }

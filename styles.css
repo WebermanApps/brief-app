@@ -64,3 +64,16 @@ textarea{flex:1;min-width:12rem;min-height:3rem}
 .sharebar{position:sticky;bottom:0;z-index:20;display:flex;justify-content:center;padding:.6rem 1rem calc(.6rem + env(safe-area-inset-bottom));background:linear-gradient(rgba(255,255,255,0),#fff 35%)}
 .btn.share{min-height:44px;min-width:10rem;background:#fff}
 .btn.share:hover,.btn.share:focus-visible{background:var(--mw-primary);color:var(--mw-primary-foreground)}
+
+/* v3 Send It Now: condensed rows that expand */
+#send-wrap{margin-bottom:3rem}.sendhead{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.sortlbl{display:flex;align-items:center;gap:.5rem}select{font-family:var(--mw-font-body);font-size:.9rem;min-height:44px;border:2px solid var(--mw-primary);border-radius:0;background:#fff;color:var(--mw-foreground);padding:0 .5rem}
+.sendlist{display:flex;flex-direction:column;gap:.5rem}.card.sendrow{padding:0}
+.rowhead{all:unset;box-sizing:border-box;width:100%;min-height:44px;display:flex;justify-content:space-between;align-items:center;gap:.75rem;padding:.6rem 1rem;cursor:pointer}
+.rowhead:hover .chev{transform:translateX(2px)}.rowhead:focus-visible{outline:2px solid var(--mw-primary)}
+.rowlabel{font-weight:600}.rowmeta{display:flex;align-items:center;gap:.6rem;flex-shrink:0}.rowmeta .pill{margin:0}
+.chev{font-family:var(--mw-font-heading);font-size:1.4rem;width:1.2rem;text-align:center;transition:transform var(--mw-dur) var(--mw-ease)}
+.rowbody{padding:0 1rem 1rem}.rowbody .actions{margin-top:.25rem}
+.sendtext{margin-top:.75rem;padding:.75rem;background:var(--mw-secondary);border:1px solid var(--mw-border);border-radius:.5rem;overflow-wrap:anywhere}
+.sendtext pre{white-space:pre-wrap;font-family:var(--mw-font-body);margin:.5rem 0 0}
+@media(max-width:480px){.rowhead{flex-wrap:wrap}.rowmeta{width:100%;justify-content:space-between}}

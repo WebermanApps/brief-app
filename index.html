@@ -43,11 +43,14 @@ html{color-scheme:light only}
   <p id="msg" class="muted"></p>
   <div class="grid"><section id="cards" class="cards"></section>
   <aside><h2>Chart</h2><div id="chart" class="card chartbox"></div></aside></div>
+  <section id="send-wrap" hidden><div class="sendhead"><h2>Send It Now</h2>
+    <label class="label sortlbl">Sort <select id="send-sort" aria-label="Sort Send It Now"><option value="az">Label A-Z</option><option value="za">Label Z-A</option><option value="lane">Lane</option><option value="status">Open First</option></select></label></div>
+    <div id="send-list" class="sendlist"></div></section>
   <section id="agents-wrap" hidden><h2>Agent Sections</h2><div id="tiles" class="tiles"></div></section>
   </div>
   <section id="detail" hidden></section>
 </main>
 <div class="sharebar"><button id="share" class="btn share mw-hover" aria-label="Share Brief Status">Share</button></div>
-<footer class="foot"><div class="wrap">MAX WEBERMAN · Brief App v2</div></footer>
+<footer class="foot"><div class="wrap">MAX WEBERMAN · Brief App v3</div></footer>
 <script src="config.js"></script><script src="app.js"></script>
 </body></html>

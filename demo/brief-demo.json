@@ -356,5 +356,31 @@
     "Sample change two (demo only)."
    ]
   }
+ ],
+ "send_items": [
+  {
+   "id": "s3",
+   "label": "Sample Send C: Vendor Follow-Up",
+   "to": "vendor@example.com",
+   "subject": "Demo: Follow-Up",
+   "body": "Hi,\n\nThis is fake demo text for a follow-up.\n\nThanks,\nMax",
+   "lane": "Construction"
+  },
+  {
+   "id": "s1",
+   "label": "Sample Send A: Thank-You Note",
+   "to": "friend@example.com",
+   "subject": "Demo: Thank You",
+   "body": "Hi,\n\nThis is fake demo text for a thank-you note.\n\nBest,\nMax",
+   "lane": "Personal"
+  },
+  {
+   "id": "s2",
+   "label": "Sample Send B: Schedule Reply",
+   "to": "office@example.org",
+   "subject": "Demo: Next Week",
+   "body": "Hi,\n\nFake demo text: Tuesday or Thursday works.\n\nMax",
+   "lane": "Admin"
+  }
  ]
 }

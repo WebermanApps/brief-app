@@ -54,6 +54,7 @@ async function dbxDownload(path) {
   return r.json();
 }
 async function dbxUpload(path, data) {
+  if (!window.MWSubmit || !(await window.MWSubmit.gate("grokbot"))) throw new Error("Password needed, nothing was sent");
   const r = await fetch("https://content.dropboxapi.com/2/files/upload", { method: "POST", headers: { Authorization: "Bearer " + await access(), "Content-Type": "application/octet-stream", "Dropbox-API-Arg": JSON.stringify({ path, mode: "overwrite", mute: true }) }, body: JSON.stringify(data, null, 2) });
   if (!r.ok) throw new Error("Upload failed " + r.status);
 }

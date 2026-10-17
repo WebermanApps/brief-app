@@ -189,8 +189,15 @@ function render() {
 }
 
 // ---- Events ----
+// ---- R104 Back: go back to wherever you came from. Entries reached by in-app hash navigation are tagged
+// (history.state.mwInApp), so history.back() is used only when the previous entry is this app; else fixed fallback #/. ----
+addEventListener("hashchange", () => { try { history.replaceState(Object.assign({}, history.state, { mwInApp: 1 }), ""); } catch (_) {} });
+function goBack() {
+  if (history.state && history.state.mwInApp && history.length > 1) { history.back(); return; }
+  location.hash = "#/";
+}
 document.querySelector("main").addEventListener("click", (e) => {
-  if (e.target.id === "back") { location.hash = "#/"; return; }
+  if (e.target.id === "back") { goBack(); return; }
   const card = e.target.closest(".card[data-id]"); if (!card || card.classList.contains("sendrow")) return; const id = card.dataset.id;
   const act = e.target.dataset.act, conf = e.target.dataset.confirm;
   if (act === "approve" || act === "done") return record(id, act);
